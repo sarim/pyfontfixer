@@ -80,7 +80,7 @@ def resetfonts(app) :
 	app.mathcs   = soup.findAll('match')
 	app.alias  = soup.findAll('alias')
 	if len(app.alias) == 0 :
-		xmls = open("/etc/fonts/conf.avail/60-latin.conf").read()
+		xmls = open("/etc/fonts/conf.d/60-latin.conf").read()
 		soups = BTS(xmls)
 		app.alias = soups.findAll('alias')
 		firstime = True
