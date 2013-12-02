@@ -24,6 +24,11 @@
 import gtk, pango ,os
 from BeautifulSoup import BeautifulStoneSoup as BTS , Tag
 
+fontconfigdir = os.getenv('HOME') + "/.config/fontconfig/"
+if not os.path.exists(fontconfigdir):
+    os.makedirs(fontconfigdir)
+fontconfigpath = fontconfigdir + ".fonts.conf"
+ 
 class  pyfontfixer:
 
     def __init__(self):
@@ -38,11 +43,6 @@ class  pyfontfixer:
         self.fontbutton4 = self.builder.get_object ("fontbutton4")
         self.fontbutton5 = self.builder.get_object ("fontbutton5")
         self.fontbutton6 = self.builder.get_object ("fontbutton6")
-        
-        fontdir = os.getenv('HOME') + "/.config/fontconfig/"
-        if not os.path.exists(fontdir):
-            os.makedirs(fontdir)
-        self.configpath = os.getenv('HOME') + "/.config/fontconfig/.fonts.conf"
 
     def on_button1_clicked (self,widget):
 		self.sans[0].string = pango.FontDescription(self.fontbutton1.get_font_name()).get_family()
@@ -77,7 +77,7 @@ def resetfonts(app) :
 	<fontconfig>
 	</fontconfig>"""
 	try :
-		xml = open(self.configpath).read()
+		xml = open(fontconfigpath).read()
 	except:
 		print ""
 
@@ -117,7 +117,7 @@ def savefonts(mathcs,alias,sans,serif,monospace) :
 	for alaitem in alias :
 		fntcnf.insert(0,"\n")
 		fntcnf.insert(1,alaitem)
-	outputfile = open(self.configpath,"w")
+	outputfile = open(fontconfigpath,"w")
 	outputfile.write(str(fsoup))
 	outputfile.close()
 			
