@@ -38,6 +38,11 @@ class  pyfontfixer:
         self.fontbutton4 = self.builder.get_object ("fontbutton4")
         self.fontbutton5 = self.builder.get_object ("fontbutton5")
         self.fontbutton6 = self.builder.get_object ("fontbutton6")
+        
+        fontdir = os.getenv('HOME') + "/.config/fontconfig/"
+        if not os.path.exists(fontdir):
+            os.makedirs(fontdir)
+        self.configpath = os.getenv('HOME') + "/.config/fontconfig/.fonts.conf"
 
     def on_button1_clicked (self,widget):
 		self.sans[0].string = pango.FontDescription(self.fontbutton1.get_font_name()).get_family()
@@ -72,7 +77,7 @@ def resetfonts(app) :
 	<fontconfig>
 	</fontconfig>"""
 	try :
-		xml = open( os.getenv('HOME') + "/.fonts.conf").read()
+		xml = open(self.configpath).read()
 	except:
 		print ""
 
@@ -112,7 +117,7 @@ def savefonts(mathcs,alias,sans,serif,monospace) :
 	for alaitem in alias :
 		fntcnf.insert(0,"\n")
 		fntcnf.insert(1,alaitem)
-	outputfile = open(os.getenv('HOME') + "/.fonts.conf","w")
+	outputfile = open(self.configpath,"w")
 	outputfile.write(str(fsoup))
 	outputfile.close()
 			
