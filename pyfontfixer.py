@@ -27,7 +27,7 @@ from BeautifulSoup import BeautifulStoneSoup as BTS , Tag
 fontconfigdir = os.getenv('HOME') + "/.config/fontconfig/"
 if not os.path.exists(fontconfigdir):
     os.makedirs(fontconfigdir)
-fontconfigpath = fontconfigdir + ".fonts.conf"
+fontconfigpath = fontconfigdir + "fonts.conf"
  
 class  pyfontfixer:
 
